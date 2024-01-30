@@ -1,17 +1,19 @@
 import { Router } from "express";
 //import * as reminderController from "../controllers/reminderController";
-import { ReminderController } from "../controllers/dasjd";
+import { ReminderController } from "../controllers/reminderController";
 
 const router = Router();
-const reminderControl = new ReminderController();
+const reminderController = new ReminderController();
 
-router.post("/reminders/create", reminderControl.createReminder);
+router.post("/reminders/create", reminderController.createReminder);
+router.get("/reminders", reminderController.listAllReminders);
 
-// Rota para obter todos os lembretes
-router.get("/reminders", async (req, res) => {
-  const reminders = await reminderControl.listAllReminders(req, res);
-  res.json(reminders);
-});
+export default router;
+
+// router.get("/reminders", async (req, res) => {
+//   const reminders = await reminderController.listAllReminders(req, res);
+//   res.json(reminders);
+// });
 
 // // Obter lembretes especifico
 // router.get("/reminders/:id", async (req, res) => {
@@ -57,5 +59,3 @@ router.get("/reminders", async (req, res) => {
 //   const result = await reminderController.deleteAllReminders();
 //   res.json(result);
 // });
-
-export default router;

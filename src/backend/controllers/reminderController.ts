@@ -1,71 +1,28 @@
-// import { PrismaClient } from "@prisma/client";
+import { Request, Response } from "express";
+import { ReminderService } from "../services/reminderService";
 
-// const prisma = new PrismaClient();
+const reminderService = new ReminderService();
 
-// // pega todos os reminders existentes
-// export const getAllReminders = async () => {
-//   return prisma.reminder.findMany();
-// };
+export class ReminderController {
+  async createReminder(req: Request, res: Response): Promise<void> {
+    const { title, content } = req.body;
+    try {
+      const createdReminder = await reminderService.createReminder(
+        title,
+        content
+      );
+      res.json(createdReminder);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 
-// export const getReminder = async (id: number) => {
-//   return prisma.reminder.findUnique({
-//     where: { id },
-//   });
-// };
-
-// export const createReminder = async (
-//   title: string,
-//   content: string,
-//   dueDate: string
-// ) => {
-//   return prisma.reminder.create({
-//     data: {
-//       title,
-//       content,
-//       dueDate: new Date(dueDate),
-//     },
-//   });
-// };
-
-// // Atualiza os reminders
-// export const updateReminder = async (
-//   id: number,
-//   title: string,
-//   content: string,
-//   dueDate: string
-// ) => {
-//   return prisma.reminder.update({
-//     where: { id },
-//     data: {
-//       title,
-//       content,
-//       dueDate,
-//     },
-//   });
-// };
-
-// // deleta Reminders
-// export const deleteReminder = async (id: number) => {
-//   return prisma.reminder.delete({
-//     where: { id },
-//   });
-// };
-
-// export const deleteAllReminders = async () => {
-//   try {
-//     const deletedAllReminders = await prisma.reminder.deleteMany();
-
-//     return {
-//       success: true,
-//       message: "Todos os lembretes foram deletados.",
-//       deletedAllReminders,
-//     };
-//   } catch (err: any) {
-//     console.error("Erro ao deletar lembretes: ", err);
-//     return {
-//       success: false,
-//       message: "Erro ao deletar lembretes.",
-//       err: err.message,
-//     };
-//   }
-// };
+  async listAllReminders(req: Request, res: Response): Promise<void> {
+    try {
+      const reminders = await reminderService.listAllReminders();
+      res.json({ reminders });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+}
