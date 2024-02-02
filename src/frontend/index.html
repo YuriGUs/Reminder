@@ -1,35 +1,51 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/src/frontend/styles/list.css" />
-    <link rel="stylesheet" href="/src/frontend/styles/index.css" />
-    <title>API de Lembretes</title>
-  </head>
-  <body>
-    <h1>API de Lembretes</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/list.css" />
+    <link rel="stylesheet" href="./styles/index.css" />
+    <title>API De Lembretes</title>
+</head>
+<body>
+    <main>
+        <form id="createReminderForm">
+            <div class="main-content">
+                <span class="main-content__title">
+                    API De Lembretes
+                </span>
 
-    <!-- Formulário para criar um lembrete -->
-    <form id="createReminderForm">
-      <label class="titulo" for="title">Título:</label>
-      <input type="text" id="title" name="title" required />
-      <br />
+                <div class="title">
+                    <label for="title" class="title-label">Titulo:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
 
-      <label class="titulo" for="content">Conteúdo:</label>
-      <textarea class="textCon" id="content" name="content" required></textarea>
-      <br />
+                <div class="text-area">
+                    <label class="text-conteudo" for="content">Conteúdo:</label>
+                    <textarea class="textCon" id="content" name="content" required></textarea>
+                </div>
 
-      <button type="button" onclick="createReminder()">Criar Lembrete</button>
-    </form>
+                <div class="button-lembrete">
+                    <button type="button" class="button-lembrete__button" onclick="createReminder()">Criar Lembrete</button>
+                </div>
+        </form>
 
-    <!-- Lista de lembretes -->
-    <h2>Seus Lembretes:</h2>
-    <ul id="remindersList" class="reminders-list"></ul>
+      </main>
+      <section>
 
-    <!-- Script para interagir com a API -->
+        <div class="lembretes">
+            <div class="lembretes-text">
+                <span>
+                    Seus Lembretes:
+                </span>
+            </div>
+            <div class="lista-lembretes">
+                <ul id="remindersList" class="reminders-list"></ul>
+            </div>
+        </div>
+
+      </section>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./scripts/content.js"></script>
-  </body>
+</body>
 </html>
