@@ -36,6 +36,7 @@ export class ReminderService {
     }
   }
 
+  // deleta apenas 1 lembrete
   async deleteReminder(id: number): Promise<Reminder> {
     try {
       const reminder = await prisma.reminder.delete({ where: { id } });
