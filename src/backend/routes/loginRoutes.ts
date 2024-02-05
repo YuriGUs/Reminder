@@ -1,9 +1,10 @@
-import { Router } from "express";
-import * as authController from "../controllers/authController";
+import { UserController } from "../modules/User/User-controller/userController";
+import express from "express";
 
-const router = Router();
+const router = express.Router();
+const userController = new UserController();
 
-//Rota para registrar um novo usuári
-router.post("/register", authController.registerUser);
+router.post("/register", userController.createUser);
+router.post("/login", userController.loginUser);
 
 export default router;
